@@ -1,7 +1,6 @@
 import * as cdk from 'aws-cdk-lib';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import { Construct } from 'constructs';
-import * as orgs from 'aws-cdk-lib/aws-organizations';
 
 
 export class Vpc extends cdk.Stack {
@@ -17,7 +16,7 @@ export class Vpc extends cdk.Stack {
           availabilityZones: ['us-east-2a', 'us-east-2b'],
           natGateways: 1,
           // vpcName starts with the environment name dynamically
-          vpcName: id + '-VPC',
+          vpcName: id,
         },
     );
 
