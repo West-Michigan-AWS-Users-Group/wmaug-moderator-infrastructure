@@ -25,5 +25,7 @@ export class Vpc extends cdk.Stack {
     new cdk.CfnOutput(this, 'PublicSubnet2', { value: vpc.publicSubnets[1].subnetId });
     new cdk.CfnOutput(this, 'PrivateSubnet1', { value: vpc.privateSubnets[0].subnetId });
     new cdk.CfnOutput(this, 'PrivateSubnet2', { value: vpc.privateSubnets[1].subnetId });
+    new cdk.CfnOutput(this, 'PublicSubnets', { value: vpc.publicSubnets.map(subnet => subnet.subnetId).join(',') });
+    new cdk.CfnOutput(this, 'PrivateSubnets', { value: vpc.privateSubnets.map(subnet => subnet.subnetId).join(',') });
     }
 }
