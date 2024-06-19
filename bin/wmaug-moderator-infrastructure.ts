@@ -16,7 +16,7 @@ const environments: Environments = {
 };
 
 Object.keys(environments).forEach((environment) => {
-    if (!environments[environment]) {
+    if (environments[environment] === false) {
         return;
     }
     new Vpc(app, `${environment}Vpc`, {
