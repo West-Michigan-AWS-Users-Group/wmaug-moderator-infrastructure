@@ -29,10 +29,10 @@ jobs:
           aws-region: "us-east-2"
 
       - name: CDK synth
-        run: cdk synth -all --require-approval=never
+        run: cdk synth --all --require-approval=never
 
       - name: CDK diff
-        run: cdk diff -all --require-approval=never
+        run: cdk diff --all --require-approval=never
       # Only deploy if main
       - name: CDK deploy
         if: github.ref == 'refs/heads/main'
