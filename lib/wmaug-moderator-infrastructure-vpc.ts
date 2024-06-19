@@ -8,8 +8,8 @@ export class Vpc extends cdk.Stack {
     super(scope, id, props);
 
     cdk.Tags.of(this).add('Service', 'Vpc');
-    cdk.Tags.of(this).add('Environment', id);
-
+    // use the id, but trim the last 3 chracaters to remove the 'Vpc' suffix
+    cdk.Tags.of(this).add('Environment', id.slice(0, -3));
 
     const vpc = new ec2.Vpc(this, 'VPC',
         {
