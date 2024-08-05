@@ -1,26 +1,22 @@
-# Welcome to your CDK TypeScript project
+# WMAUG Moderator Infrastructure
 
-This is a blank project for CDK development with TypeScript.
+CDK project for deploying core infrastructure for the West Michigan AWS Users Group moderator account.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+### VPC
 
-## Useful commands
+This stack creates a VPC with public and private subnets in two availability zones with NAT Gateways and an internet gateway.
+This is the base infrastructure for any VPC based workloads. VPC ids and subnet IDs are exported by means of CFN exports
+for use in other stacks.
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `npx cdk deploy`  deploy this stack to your default AWS account/region
-* `npx cdk diff`    compare deployed stack with current state
-* `npx cdk synth`   emits the synthesized CloudFormation template
+### Bastion
 
-```angular2html
-#!/bin/bash
+This stack creates a bastion host accessible via AWS SSM. Deploy and connect to the bastion host to access the private instances in the VPC.
+This deploys Amazon Linux2 as the bastion host with an instance profile that allows full S3 access for long term storage
+of things like backups.
 
-# Set the environment variable and run the TypeScript file for the first stack
-export ENVIRONMENT="productionA"
-ts-node bin/wmaug-moderator-infrastructure.ts
+```text
+aws ssm start-session --target i-0123456789123 --profile <profile-name> --region <region>
 
-# Set the environment variable and run the TypeScript file for the second stack
-export ENVIRONMENT="productionB"
-ts-node bin/wmaug-moderator-infrastructure.ts
+Starting session with SessionId: user-aabbccddeeffggg
+sh-4.2$
 ```
